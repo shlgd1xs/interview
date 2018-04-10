@@ -33,12 +33,13 @@ React组件生命周期依次为：
 >>> componentWillMount  
 >>> render  
 >>> componentDidMount  
+>>
 >> 实例化完成后的更新  
 >>> getInitialState  
 >>> componentWillMount  
 >>> render  
 >>> componentDidMount  
-  
+>
 > 存在期    
 >> 组件已存在时的状态改变
 >>> componentWillReceiveProps
