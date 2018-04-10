@@ -16,8 +16,7 @@
 ***
 #### <p id='question1'>1.Webpack/Gulp/Grunt区别，为什么选择Webpack？</p>
 
-> Gulp和Grunt基于任务流的自动化构建工具
-
+> Gulp和Grunt基于任务流的自动化构建工具  
 > Webpack已模块化的形式进行静态资源的构建
 
 Gulp和Grunt属于同类型的构建工具，Grunt按顺序执行任务，效率不及Gulp
