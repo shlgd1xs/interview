@@ -42,10 +42,10 @@ React组件生命周期依次为：
 >
 > 存在期    
 >> 组件已存在时的状态改变
->>> componentWillReceiveProps
->>> shouldComponentUpdate
->>> componentWillUpdate
->>> render
+>>> componentWillReceiveProps  
+>>> shouldComponentUpdate  
+>>> componentWillUpdate  
+>>> render  
 >>> componentDidUpdate
 >
 > 销毁&清理期  
