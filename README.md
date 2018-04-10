@@ -4,8 +4,8 @@
 
 
 ### 目录
-- [Webpack/Gulp/Grunt区别，为什么选择Webpack？](#question1)
-- [React的生命周期？](#question2)
+- [Webpack/Gulp/Grunt区别，为什么选择Webpack？](#1.Webpack/Gulp/Grunt区别，为什么选择Webpack？)
+- [React的生命周期？](#2.React的生命周期？)
 - [如何提升React性能？](#question3)
 - [用Node做中间层的好处？](#question4)
 - [什么是Babel，你为什么使用Babel？](#question5)
@@ -14,7 +14,7 @@
 -
 
 ***
-#### <p id='question1'>1.Webpack/Gulp/Grunt区别，为什么选择Webpack？</p>
+#### 1.Webpack/Gulp/Grunt区别，为什么选择Webpack？
 
 > Gulp和Grunt基于任务流的自动化构建工具  
 > Webpack已模块化的形式进行静态资源的构建
@@ -24,7 +24,7 @@ Gulp和Grunt属于同类型的构建工具，Grunt按顺序执行任务，效率
 Webpack模块化思想非常适用于大型复杂的webapp的场景。Webpack当下热门，生态完善，文档优秀。
 
 ***
-#### <p id='question2'>2.React的生命周期？</p>
+#### 2.React的生命周期？
 
 React组件生命周期依次为：
 > 实例化
