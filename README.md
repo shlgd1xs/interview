@@ -12,6 +12,8 @@
 - [什么是闭包，闭包有什么作用？](#question6)
 - [从浏览器输入Url开始](#question7)
 - [异步处理方式？使用过那些Promise库](#question8)
+- [CMD AMD区别](#question9)
+- [Webpack模块化原理 Code Splitting]($question10)
 
 ***
 #### <p id='question1'>1.Webpack/Gulp/Grunt区别，为什么选择Webpack？</p>
@@ -115,3 +117,14 @@ a();
   - es6-promise
   - promise-polyfill
 - async/await
+
+
+#### <p id='question9'>9.CMD与AMD的区别</p>
+
+1. 对于依赖的模块，AMD 是提前执行，CMD 是延迟执行。
+2. CMD 推崇依赖就近，AMD 推崇依赖前置。
+3. Webpack为CMD
+
+#### <p id='question10'>10.Webpack模块化原理 Code Splitting</p>
+
+webpack通过__webpack_require__.e函数实现了动态加载，再通过webpackJsonp函数实现异步加载回调，把模块内容以promise的方式暴露给调用方，从而实现了对code splitting的支持。
