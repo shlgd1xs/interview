@@ -13,7 +13,8 @@
 - [从浏览器输入Url开始](#question7)
 - [异步处理方式？使用过那些Promise库](#question8)
 - [CMD AMD区别](#question9)
-- [Webpack模块化原理 Code Splitting]($question10)
+- [Webpack模块化原理 Code Splitting](#question10)
+- [JS继承的实现方式](#question11)
 
 ***
 #### <p id='question1'>1.Webpack/Gulp/Grunt区别，为什么选择Webpack？</p>
@@ -128,3 +129,130 @@ a();
 #### <p id='question10'>10.Webpack模块化原理 Code Splitting</p>
 
 webpack通过__webpack_require__.e函数实现了动态加载，再通过webpackJsonp函数实现异步加载回调，把模块内容以promise的方式暴露给调用方，从而实现了对code splitting的支持。
+
+#### <p id='question11'>11.JS继承的实现方式</p>
+```javascript
+// 定义一个动物类
+function Animal (name) {
+  // 属性
+  this.name = name || 'Animal';
+  // 实例方法
+  this.sleep = function(){
+    console.log(this.name + '正在睡觉！');
+  }
+}
+// 原型方法
+Animal.prototype.eat = function(food) {
+  console.log(this.name + '正在吃：' + food);
+};
+```
+1.原型链继承  
+核心： 将父类的实例作为子类的原型  
+```javascript
+function Cat(){
+}
+Cat.prototype = new Animal();
+Cat.prototype.name = 'cat';
+
+//　Test Code
+var cat = new Cat();
+console.log(cat.name);
+console.log(cat.eat('fish'));
+console.log(cat.sleep());
+console.log(cat instanceof Animal); //true
+console.log(cat instanceof Cat); //true
+```
+2.构造继承  
+核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）  
+```javascript
+function Cat(name){
+  Animal.call(this);
+  this.name = name || 'Tom';
+}
+
+// Test Code
+var cat = new Cat();
+console.log(cat.name);
+console.log(cat.sleep());
+console.log(cat instanceof Animal); // false
+console.log(cat instanceof Cat); // true
+```
+3.实例继承   
+核心：为父类实例添加新特性，作为子类实例返回  
+```javascript
+function Cat(name){
+  var instance = new Animal();
+  instance.name = name || 'Tom';
+  return instance;
+}
+
+// Test Code
+var cat = new Cat();
+console.log(cat.name);
+console.log(cat.sleep());
+console.log(cat instanceof Animal); // true
+console.log(cat instanceof Cat); // false
+```
+
+4.拷贝继承
+```javascript
+function Cat(name){
+  var animal = new Animal();
+  for(var p in animal){
+    Cat.prototype[p] = animal[p];
+  }
+  Cat.prototype.name = name || 'Tom';
+}
+
+// Test Code
+var cat = new Cat();
+console.log(cat.name);
+console.log(cat.sleep());
+console.log(cat instanceof Animal); // false
+console.log(cat instanceof Cat); // true
+```
+
+
+5.组合继承  
+核心：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用
+```JavaScript
+function Cat(name){
+  Animal.call(this);
+  this.name = name || 'Tom';
+}
+Cat.prototype = new Animal();
+
+// 感谢 @学无止境c 的提醒，组合继承也是需要修复构造函数指向的。
+
+Cat.prototype.constructor = Cat;
+
+// Test Code
+var cat = new Cat();
+console.log(cat.name);
+console.log(cat.sleep());
+console.log(cat instanceof Animal); // true
+console.log(cat instanceof Cat); // true
+```
+
+
+6.寄生组合继承
+```JavaScript
+function Cat(name){
+  Animal.call(this);
+  this.name = name || 'Tom';
+}
+(function(){
+  // 创建一个没有实例方法的类
+  var Super = function(){};
+  Super.prototype = Animal.prototype;
+  //将实例作为子类的原型
+  Cat.prototype = new Super();
+})();
+
+// Test Code
+var cat = new Cat();
+console.log(cat.name);
+console.log(cat.sleep());
+console.log(cat instanceof Animal); // true
+console.log(cat instanceof Cat); //true
+```
